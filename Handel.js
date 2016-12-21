@@ -3,12 +3,35 @@ function Handel() {
     return {
       map: f => compose(f(input)),
       fold: f => f(input),
-      inspect: () => `Handel(${input})`
+      inspect: () => `compose(${input})`
     }
   }
 
+  function right(input) {
+    return {
+      map: f => right(f(input)),
+      fold: (f, g) => g(input),
+      inspect: () => `right(${input})`
+    }
+  }
+
+  function left(input) {
+    return {
+      map: f => left(input),
+      fold: (f, g) => f(input),
+      inspect: () => `left(${input})`
+    }
+  }
+
+  function fromNullable(input) {
+    return input != null ? right(input) : left(null);
+  }
+
   return {
-    compose
+    compose,
+    right,
+    left,
+    fromNullable
   }
 }
 

@@ -16,3 +16,17 @@ const greeting3 = Handel.compose('hello world')
   .fold(s => (s.toUpperCase()));
 
 console.log(greeting3);
+
+function findSlogan(name) {
+  const states = {
+    oregon: 'We Love Dreamers',
+    washington: 'The Evergreen State',
+    california: 'The Golden State'
+  };
+  return Handel.fromNullable(states[name]);
+}
+
+const slogan = findSlogan('oregon')
+  .fold(e => 'undefined', c => c.toUpperCase());
+
+console.log(slogan);
